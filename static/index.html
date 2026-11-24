@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Cyber AI | منصة الوكلاء السيبرانيين والأمن المتقدم</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* فيديو الخلفية الشامل */
+        .bg-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: -2;
+        }
+        /* طبقة تعتيم خفيفة جداً لإظهار الفيديو بوضوح */
+        .bg-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(10, 15, 30, 0.65);
+            z-index: -1;
+        }
+        /* حركات نصية ترحيبية */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeInDown 1s ease-out forwards;
+        }
+    </style>
+<base target="_blank">
+</head>
+<body class="text-slate-100 min-h-screen font-sans relative overflow-x-hidden">
+
+    <!-- فيديو الخلفية المتحرك -->
+    <video id="bgVideo" autoplay loop muted playsinline class="bg-video">
+        <source src="assets/bg.mp4" type="video/mp4">
+        متصفحك لا يدعم تشغيل الفيديو.
+    </video>
+    
+    <!-- طبقة التظليل فوق الفيديو -->
+    <div class="bg-overlay"></div>
+
+    <!-- Header (شريط التنقل العلوي) -->
+    <header class="bg-slate-950/60 border-b border-slate-700/50 py-4 px-6 shadow-2xl backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-3 cursor-pointer" onclick="goHome()">
+                <div class="bg-indigo-600 p-2.5 rounded-xl text-white shadow-lg shadow-indigo-500/30">
+                    <i class="fa-solid fa-shield-halved text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold tracking-wide">Nexus Cyber AI</h1>
+                    <p class="text-xs text-slate-300">منصة الوكلاء السيبرانيين الذكية</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <button onclick="goHome()" class="text-xs bg-slate-800/80 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg transition border border-slate-600/50 cursor-pointer flex items-center gap-1.5">
+                    <i class="fa-solid fa-house"></i> الرئيسية
+                </button>
+                <span class="bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-xs px-3 py-1.5 rounded-full font-medium flex items-center backdrop-blur-sm">
+                    <i class="fa-solid fa-circle text-[8px] ml-1.5 animate-pulse text-emerald-400"></i> النظام يعمل بكفاءة
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Sections -->
+    <main class="max-w-7xl mx-auto p-6 relative z-10">
+        
+        <!-- SECTION 0: WELCOME DASHBOARD (HOME) -->
+        <div id="section-home" class="py-8 flex flex-col items-center justify-center text-center animate-fade-in">
+            
+            <!-- الشعار المتحرك (اللوغو) تحت الشريط مباشرة وفوق عبارة الجيل القادم -->
+            <div class="mb-6 animate-fade-in" style="filter:drop-shadow(0 0 25px rgba(56,189,248,.25));">
+                <svg width="120" height="140" viewBox="0 0 360 430" xmlns="http://www.w3.org/2000/svg" aria-label="Nexus Cyber AI Logo">
+                  <defs>
+                    <linearGradient id="shieldGrad" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#164e7e"/><stop offset="55%" stop-color="#0b2c4d"/><stop offset="100%" stop-color="#071a30"/>
+                    </linearGradient>
+                    <linearGradient id="edgeGrad" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" stop-color="#38bdf8"/><stop offset="50%" stop-color="#818cf8"/><stop offset="100%" stop-color="#22d3ee"/>
+                    </linearGradient>
+                    <linearGradient id="lockGrad" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#7dd3fc"/><stop offset="100%" stop-color="#0ea5e9"/>
+                    </linearGradient>
+                    <radialGradient id="aura" cx="50%" cy="45%" r="55%">
+                      <stop offset="0%" stop-color="#38bdf8" stop-opacity=".22"/><stop offset="100%" stop-color="#38bdf8" stop-opacity="0"/>
+                    </radialGradient>
+                    <filter id="glowF" x="-60%" y="-60%" width="220%" height="220%">
+                      <feGaussianBlur stdDeviation="5" result="b"/>
+                      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                    </filter>
+                    <path id="hexPath" d="M180 28 L312 104 L312 256 L180 332 L48 256 L48 104 Z"/>
+                  </defs>
+                  <circle cx="180" cy="180" r="150" fill="url(#aura)">
+                    <animate attributeName="r" values="140;158;140" dur="4s" repeatCount="indefinite"/>
+                    <animate attributeName="opacity" values=".7;1;.7" dur="4s" repeatCount="indefinite"/>
+                  </circle>
+                  <g filter="url(#glowF)">
+                    <use href="#hexPath" fill="none" stroke="#155e75" stroke-width="2" opacity=".6"/>
+                    <use href="#hexPath" fill="none" stroke="url(#edgeGrad)" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="90 780" stroke-dashoffset="0">
+                      <animate attributeName="stroke-dashoffset" values="0;-870" dur="6s" repeatCount="indefinite"/>
+                    </use>
+                  </g>
+                  <g fill="#67e8f9" filter="url(#glowF)">
+                    <circle cx="180" cy="28"  r="5"><animate attributeName="opacity" values="1;.15;1" dur="2.4s" begin="0s"    repeatCount="indefinite"/></circle>
+                    <circle cx="312" cy="104" r="5"><animate attributeName="opacity" values="1;.15;1" dur="2.4s" begin=".4s"  repeatCount="indefinite"/></circle>
+                    <circle cx="312" cy="256" r="5"><animate attributeName="opacity" values="1;.15;1" dur="2.4s" begin=".8s"  repeatCount="indefinite"/></circle>
+                    <circle cx="180" cy="332" r="5"><animate attributeName="opacity" values="1;.15;1" dur="2.4s" begin="1.2s" repeatCount="indefinite"/></circle>
+                    <circle cx="48"  cy="256" r="5"><animate attributeName="opacity" values="1;.15;1" dur="2.4s" begin="1.6s" repeatCount="indefinite"/></circle>
+                    <circle cx="48"  cy="104" r="5"><animate attributeName="opacity" values="1;.15;1" dur="2.4s" begin="2s"   repeatCount="indefinite"/></circle>
+                  </g>
+                  <g filter="url(#glowF)">
+                    <path d="M180 78 L268 116 V196 C268 252 232 288 180 306 C128 288 92 252 92 196 V116 Z" fill="url(#shieldGrad)" stroke="url(#edgeGrad)" stroke-width="3"/>
+                    <path d="M180 92 L254 124 V196 C254 243 224 274 180 290 C136 274 106 243 106 196 V124 Z" fill="none" stroke="#38bdf8" stroke-width="1" opacity=".35"/>
+                  </g>
+                  <g stroke="#22d3ee" stroke-width="1.6" fill="none" opacity=".8">
+                    <path d="M112 150 H150 L168 168"/><path d="M248 150 H210 L192 168"/>
+                    <path d="M112 226 H146 L160 212"/><path d="M248 226 H214 L200 212"/>
+                  </g>
+                  <g fill="#67e8f9" filter="url(#glowF)">
+                    <circle r="3.5"><animateMotion dur="2.2s" repeatCount="indefinite" path="M112 150 H150 L168 168"/></circle>
+                    <circle r="3.5"><animateMotion dur="2.2s" begin="1.1s" repeatCount="indefinite" path="M248 150 H210 L192 168"/></circle>
+                    <circle r="3.5"><animateMotion dur="2.2s" begin=".6s" repeatCount="indefinite" path="M112 226 H146 L160 212"/></circle>
+                    <circle r="3.5"><animateMotion dur="2.2s" begin="1.7s" repeatCount="indefinite" path="M248 226 H214 L200 212"/></circle>
+                  </g>
+                  <g filter="url(#glowF)">
+                    <path d="M160 176 v-14 a20 20 0 0 1 40 0 v14" fill="none" stroke="url(#lockGrad)" stroke-width="9" stroke-linecap="round"/>
+                    <rect x="148" y="176" width="64" height="52" rx="10" fill="url(#lockGrad)"/>
+                    <circle cx="180" cy="196" r="7" fill="#082f49"/>
+                    <rect x="176" y="198" width="8" height="14" rx="4" fill="#082f49"/>
+                    <circle cx="180" cy="196" r="7" fill="#a5f3fc" opacity="0">
+                      <animate attributeName="opacity" values="0;.9;0" dur="2.4s" repeatCount="indefinite"/>
+                    </circle>
+                  </g>
+                  <g opacity=".5">
+                    <path d="M180 176 L232 176 A52 52 0 0 1 217 213 Z" fill="#67e8f9" opacity=".25">
+                      <animateTransform attributeName="transform" type="rotate" values="0 180 202;360 180 202" dur="3.5s" repeatCount="indefinite"/>
+                    </path>
+                  </g>
+                  <path d="M180 78 L268 116 V196 C268 252 232 288 180 306 C128 288 92 252 92 196 V116 Z" fill="none" stroke="#38bdf8" stroke-width="2" opacity="0" transform-origin="180 192">
+                    <animate attributeName="opacity" values="0;.5;0" dur="3s" repeatCount="indefinite"/>
+                    <animateTransform attributeName="transform" type="scale" values="1;1.12" dur="3s" repeatCount="indefinite"/>
+                  </path>
+                  <text x="180" y="384" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" font-weight="800" letter-spacing="6" fill="#e2f4ff">NEXUS<tspan fill="#38bdf8">CYBER</tspan></text>
+                  <text x="180" y="410" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" letter-spacing="8" fill="#38bdf8" opacity=".85">AI SECURITY</text>
+                </svg>
+            </div>
+
+            <div class="inline-flex items-center gap-2 bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 px-4 py-1.5 rounded-full text-xs font-semibold mb-4 shadow-lg shadow-indigo-500/10">
+                <i class="fa-solid fa-sparkles"></i> الجيل القادم من أمن المعلومات والتحقيق الجنائي
+            </div>
+            
+            <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-3 text-white">
+                أهلاً بك في <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400">Nexus Cyber AI</span>
+            </h2>
+            <p class="text-slate-300 text-sm md:text-base max-w-2xl mb-8 leading-relaxed">
+                منصة متكاملة مدعومة بنظام وكلاء الذكاء الاصطناعي لاكتشاف الثغرات بدقة، فحص الأكواد الأمنية، وإجراء التحقيقات الرقمية باحترافية عالية.
+            </p>
+
+            <!-- Grid Cards (المربعات التفاعلية) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl px-4">
+                
+                <!-- Card 1: Code Audit & Vulnerability Detection -->
+                <div onclick="switchTab('audit')" 
+                    class="group relative bg-slate-950/60 border border-slate-700/60 rounded-3xl p-8 text-right cursor-pointer transition-all duration-300 hover:scale-105 hover:border-indigo-500 hover:shadow-2xl hover:shadow-indigo-500/30 backdrop-blur-md overflow-hidden">
+                    <div class="absolute -left-10 -bottom-10 w-32 h-32 bg-indigo-600/10 rounded-full blur-2xl group-hover:bg-indigo-600/30 transition-all"></div>
+                    <div class="bg-indigo-600/20 text-indigo-400 w-14 h-14 rounded-2xl flex items-center justify-center mb-6 border border-indigo-500/40 text-2xl group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300 shadow-lg">
+                        <i class="fa-solid fa-shield-virus"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-indigo-300 transition-colors">كشف الثغرات بدقة (SAST)</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed mb-6">كشف الثغرات الأمنية الحرجة في الأكواد البرمجية بدقة متناهية، تحليل التعقيد، وتقديم حلول تصحيح فورية.</p>
+                    <span class="inline-flex items-center gap-2 text-xs font-semibold text-indigo-400 group-hover:translate-x-[-5px] transition-transform">
+                        ابدأ الفحص الآن <i class="fa-solid fa-arrow-left"></i>
+                    </span>
+                </div>
+
+                <!-- Card 2: Digital Forensics -->
+                <div onclick="switchTab('forensic')" 
+                    class="group relative bg-slate-950/60 border border-slate-700/60 rounded-3xl p-8 text-right cursor-pointer transition-all duration-300 hover:scale-105 hover:border-purple-500 hover:shadow-2xl hover:shadow-purple-500/30 backdrop-blur-md overflow-hidden">
+                    <div class="absolute -left-10 -bottom-10 w-32 h-32 bg-purple-600/10 rounded-full blur-2xl group-hover:bg-purple-600/30 transition-all"></div>
+                    <div class="bg-purple-500/20 text-purple-300 w-14 h-14 rounded-2xl flex items-center justify-center mb-6 border border-purple-500/40 text-2xl group-hover:bg-purple-600 group-hover:text-white transition-all duration-300 shadow-lg">
+                        <i class="fa-solid fa-magnifying-glass-chart"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2 group-hover:text-purple-300 transition-colors">التحقيق الجنائي الرقمي (DFIR)</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed mb-6">تحليل الآثار الرقمية، كشف الأكواد الخبيثة المستترة، ورصد أدلة التسلل السيبراني المتقدمة.</p>
+                    <span class="inline-flex items-center gap-2 text-xs font-semibold text-purple-400 group-hover:translate-x-[-5px] transition-transform">
+                        استكشف القسم <i class="fa-solid fa-arrow-left"></i>
+                    </span>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- SECTION 1: CODE AUDITOR -->
+        <div id="section-audit" class="hidden grid grid-cols-1 lg:grid-cols-2 gap-6">
+            
+            <!-- Left Column: Input Form -->
+            <section class="bg-slate-950/40 border border-slate-700/60 rounded-2xl p-5 flex flex-col shadow-2xl backdrop-blur-md">
+                <div class="flex justify-between items-center mb-3">
+                    <label for="codeinput" class="text-sm font-semibold text-slate-200 flex items-center gap-2">
+                        <i class="fa-solid fa-code text-indigo-400"></i> الصق الكود البرمجي هنا:
+                    </label>
+                    <button onclick="loadSampleCode()" class="text-xs text-indigo-300 hover:text-indigo-200 underline cursor-pointer">
+                        تجربة كود جاهز (للاختبار)
+                    </button>
+                </div>
+                <textarea id="codeinput" rows="16" dir="ltr" placeholder="اكتب أو الصق الكود البرمجي (Python, JavaScript, etc.)..." 
+                    class="w-full bg-slate-950/60 border border-slate-700/60 rounded-xl p-4 font-mono text-sm text-slate-100 text-left focus:outline-none focus:border-indigo-500 transition resize-none leading-relaxed backdrop-blur-sm placeholder-slate-400"></textarea>
+                
+                <button onclick="auditCode()" id="auditBtn" 
+                    class="mt-4 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3 px-6 rounded-xl transition duration-200 flex items-center justify-center gap-2 shadow-lg shadow-indigo-600/30 cursor-pointer">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> بدء فحص الثغرات الشامل بالوكلاء
+                </button>
+            </section>
+
+            <!-- Right Column: Results Dashboard -->
+            <section class="bg-slate-950/40 border border-slate-700/60 rounded-2xl p-5 flex flex-col shadow-2xl backdrop-blur-md overflow-y-auto max-h-[700px]">
+                <div class="flex justify-between items-center mb-4 border-b border-slate-700/50 pb-3">
+                    <h2 class="text-sm font-semibold text-slate-200 flex items-center gap-2">
+                        <i class="fa-solid fa-chart-line text-emerald-400"></i> تقرير كشف الثغرات وتحليل الوكلاء
+                    </h2>
+                    <!-- زر حفظ التقرير PDF -->
+                    <button id="downloadPdfBtn" onclick="downloadPDF()" class="hidden text-xs bg-emerald-600 hover:bg-emerald-500 text-white font-medium px-3 py-1.5 rounded-lg transition items-center gap-1.5 shadow-md cursor-pointer">
+                        <i class="fa-solid fa-file-pdf"></i> حفظ التقرير (PDF)
+                    </button>
+                </div>
+
+                <div id="loading" class="hidden flex-col items-center justify-center py-20 text-center">
+                    <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-400 mb-4"></div>
+                    <p class="text-sm text-slate-300">جاري عمل وكلاء رصد الثغرات والأداء على تحليل الكود بدقة...</p>
+                </div>
+
+                <div id="placeholder" class="flex flex-col items-center justify-center py-24 text-center text-slate-400">
+                    <i class="fa-solid fa-terminal text-4xl mb-3 opacity-60"></i>
+                    <p class="text-sm">قم بإدخال الكود واضغط على "بدء فحص الثغرات" لعرض النتائج التفصيلية.</p>
+                </div>
+
+                <!-- حاوية التقرير -->
+                <div id="report-container" class="space-y-6">
+                    <div id="results" class="hidden space-y-6">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-slate-950/60 border border-slate-700/50 p-4 rounded-xl text-center backdrop-blur-sm">
+                                <span class="text-xs text-slate-300 block mb-1">مستوى الأمان</span>
+                                <span id="secScore" class="text-2xl font-bold text-emerald-400">--/100</span>
+                            </div>
+                            <div class="bg-slate-950/60 border border-slate-700/50 p-4 rounded-xl text-center backdrop-blur-sm">
+                                <span class="text-xs text-slate-300 block mb-1">جودة الأداء</span>
+                                <span id="perfScore" class="text-2xl font-bold text-indigo-400">--/100</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-950/60 border border-slate-700/50 p-4 rounded-xl backdrop-blur-sm">
+                            <h3 class="text-xs font-bold text-rose-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                                <i class="fa-solid fa-triangle-exclamation"></i> الثغرات الأمنية المكتشفة
+                            </h3>
+                            <div id="secList" class="space-y-2 text-sm text-slate-200"></div>
+                        </div>
+
+                        <div class="bg-slate-950/60 border border-slate-700/50 p-4 rounded-xl backdrop-blur-sm">
+                            <h3 class="text-xs font-bold text-amber-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                                <i class="fa-solid fa-gauge-high"></i> تحليل الأداء (Complexity)
+                            </h3>
+                            <div class="text-xs text-slate-200 space-y-1 mb-3">
+                                <p><strong>التعقيد الزمني:</strong> <span id="timeComp" class="text-indigo-300 font-mono">--</span></p>
+                                <p><strong>التعقيد المكاني:</strong> <span id="spaceComp" class="text-indigo-300 font-mono">--</span></p>
+                            </div>
+                            <h4 class="text-xs font-semibold text-slate-300 mb-1">الكود الآمن والمصحح (Refactored Code):</h4>
+                            <pre class="bg-slate-950/80 p-3 rounded-lg text-xs font-mono text-emerald-300 overflow-x-auto border border-slate-800" dir="ltr" style="text-align: left;"><code id="refactoredCode"></code></pre>
+                        </div>
+
+                        <div class="bg-slate-950/60 border border-slate-700/50 p-4 rounded-xl backdrop-blur-sm">
+                            <h3 class="text-xs font-bold text-sky-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                                <i class="fa-solid fa-book"></i> التوثيق والملخص
+                            </h3>
+                            <p id="docSummary" class="text-xs text-slate-200 leading-relaxed mb-2"></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- SECTION 2: DIGITAL FORENSICS -->
+        <div id="section-forensic" class="hidden">
+            <div class="bg-slate-950/40 border border-slate-700/60 rounded-2xl p-12 text-center max-w-2xl mx-auto shadow-2xl backdrop-blur-md">
+                <div class="bg-purple-500/20 text-purple-300 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-purple-500/40 text-2xl">
+                    <i class="fa-solid fa-magnifying-glass-chart"></i>
+                </div>
+                <h2 class="text-lg font-bold text-slate-100 mb-2">قسم التحقيق الجنائي الرقمي (DFIR)</h2>
+                <p class="text-xs text-slate-300 leading-relaxed mb-6">
+                    هذا القسم قيد التطوير ليحتوي على وكيل ذكي متخصص في تحليل الآثار الرقمية، كشف الأكواد الخبيثة، ورصد محاولات إخفاء الآثار (Anti-Forensics).
+                </p>
+                <span class="bg-purple-500/20 text-purple-300 text-xs px-4 py-2 rounded-full border border-purple-500/40 font-medium">
+                    قريباً في نسختك القادمة 🚀
+                </span>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const video = document.getElementById('bgVideo');
+            if (video) {
+                video.muted = true;
+                video.play().catch(err => console.log("Autoplay deferred:", err));
+            }
+        });
+
+        function goHome() {
+            document.getElementById('section-home').classList.remove('hidden');
+            document.getElementById('section-audit').classList.add('hidden');
+            document.getElementById('section-forensic').classList.add('hidden');
+        }
+
+        function switchTab(tabName) {
+            const homeSection = document.getElementById('section-home');
+            const auditSection = document.getElementById('section-audit');
+            const forensicSection = document.getElementById('section-forensic');
+
+            homeSection.classList.add('hidden');
+
+            if (tabName === 'audit') {
+                auditSection.classList.remove('hidden');
+                forensicSection.classList.add('hidden');
+            } else if (tabName === 'forensic') {
+                auditSection.classList.add('hidden');
+                forensicSection.classList.remove('hidden');
+            }
+        }
+
+        function loadSampleCode() {
+            const sample = `def process_users(users):
+    for i in range(len(users)):
+        for j in range(len(users)):
+            if users[i]['id'] == users[j]['id'] and i != j:
+                print("Duplicate found")
+    
+    db_password = "Admin_12345_Hardcoded_Secret!"
+    query = "SELECT * FROM users WHERE name = '" + users[0]['name'] + "'"
+    return query`;
+            document.getElementById('codeinput').value = sample;
+        }
+
+        async function auditCode() {
+            const code = document.getElementById('codeinput').value;
+            if (!code.trim()) {
+                alert('الرجاء إدخال كود أولاً!');
+                return;
+            }
+
+            document.getElementById('placeholder').classList.add('hidden');
+            document.getElementById('results').classList.add('hidden');
+            document.getElementById('downloadPdfBtn').classList.add('hidden');
+            document.getElementById('loading').classList.remove('hidden');
+            document.getElementById('loading').classList.add('flex');
+            document.getElementById('auditBtn').disabled = true;
+
+            try {
+                const response = await fetch('/api/audit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ code: code })
+                });
+
+                const data = await response.json();
+                if (!response.ok) throw new Error(data.detail || 'حدث خطأ أثناء الاتصال بالخادم');
+
+                document.getElementById('secScore').innerText = data.security.security_score + '/100';
+                document.getElementById('perfScore').innerText = data.performance.quality_score + '/100';
+                document.getElementById('timeComp').innerText = data.performance.time_complexity;
+                document.getElementById('spaceComp').innerText = data.performance.space_complexity;
+                document.getElementById('refactoredCode').innerText = data.performance.refactored_code;
+                document.getElementById('docSummary').innerText = data.documentation.summary;
+
+                const secList = document.getElementById('secList');
+                secList.innerHTML = '';
+                if (!data.security.vulnerabilities || data.security.vulnerabilities.length === 0) {
+                    secList.innerHTML = '<p class="text-xs text-emerald-400">لم يتم اكتشاف أي ثغرات أمنية.</p>';
+                } else {
+                    data.security.vulnerabilities.forEach(v => {
+                        secList.innerHTML += `
+                            <div class="bg-slate-950/80 p-2.5 rounded-lg border border-slate-800 text-xs">
+                                <div class="font-bold text-rose-300">${v.title} (${v.severity})</div>
+                                <div class="text-slate-300 mt-0.5">${v.description}</div>
+                            </div>
+                        `;
+                    });
+                }
+
+                document.getElementById('results').classList.remove('hidden');
+                document.getElementById('downloadPdfBtn').classList.remove('hidden');
+                document.getElementById('downloadPdfBtn').classList.add('flex');
+            } catch (err) {
+                alert('خطأ: ' + err.message);
+            } finally {
+                document.getElementById('loading').classList.remove('flex');
+                document.getElementById('loading').classList.add('hidden');
+                document.getElementById('auditBtn').disabled = false;
+            }
+        }
+
+        // دالة الطباعة والحفظ كـ PDF
+        function downloadPDF() {
+            window.print();
+        }
+    </script>
+</body>
+</html>
